@@ -8,6 +8,7 @@ import net.madz.stochastic.core.DeduceResultEnum;
 import net.madz.stochastic.core.DynamicCaseContext;
 import net.madz.stochastic.core.IDimension;
 import net.madz.stochastic.core.IDynamicCase;
+import net.madz.stochastic.core.IExpectation;
 import net.madz.stochastic.core.IExploreStrategy;
 import net.madz.stochastic.core.IGlobalDimension;
 import net.madz.stochastic.core.TestContext;
@@ -47,6 +48,27 @@ public class DynamicDemo {
 
         @Override
         protected DeduceResultEnum generateExpectation(TestContext context, DynamicCaseContext deduceContext, IDynamicCase t) {
+            deduceContext.addExpectation(new IExpectation() {
+
+                @Override
+                public void verify(DynamicCaseContext context) {
+                    System.out.println("------------Always Passed.----------");
+                }
+
+                @Override
+                public boolean isNegative() {
+                    return false;
+                }
+
+                @Override
+                public String getFormalizedString() {
+                    return "Always pass expectation!!!!!!!!!!";
+                }
+
+                public String toString() {
+                    return "1st expectation: always passing. ";
+                }
+            });
             return DeduceResultEnum.Pass;
         }
 
@@ -98,26 +120,6 @@ public class DynamicDemo {
                     dimensions.add(newDimension(dimension));
                 }
             }
-            /*
-             * // Loading Pair Dimensions for (Dimension dimension :
-             * definedDimensions) { if
-             * (IPairDimension.class.isAssignableFrom(dimension
-             * .dimensionClass())) { final PossiblePair[] possiblePairs =
-             * sampleSpace.possiblePairs(); for (PossiblePair possiblePair :
-             * possiblePairs) { IPairDimension pairDimension = (IPairDimension)
-             * newDimension(dimension);
-             * pairDimension.setOne(possiblePair.one());
-             * pairDimension.setOther(possiblePair.other());
-             * dimensions.add(pairDimension); } } } // Loading Object Dimensions
-             * for (Dimension dimension : definedDimensions) { if
-             * (IObjectDimension
-             * .class.isAssignableFrom(dimension.dimensionClass())) { final
-             * ZuoraCreate[] zuoraObjects = sampleSpace.zuoraObjects(); for
-             * (ZuoraCreate object : zuoraObjects) { IObjectDimension
-             * objectDimension = (IObjectDimension) newDimension(dimension);
-             * objectDimension.setOne("${" + object.key() + "}");
-             * dimensions.add(objectDimension); } } }
-             */
             return dimensions;
         }
 
@@ -134,9 +136,8 @@ public class DynamicDemo {
         }
     }
 
-    @DynamicCase(dimensions = { 
-            @Dimension(alias = "1st", enumClass = FirstDim.class, priority=3), 
-            @Dimension(alias = "2nd", enumClass = SecondDim.class, priority=2) })
+    @DynamicCase(dimensions = { @Dimension(alias = "1st", enumClass = FirstDim.class, priority = 3),
+            @Dimension(alias = "2nd", enumClass = SecondDim.class, priority = 2) })
     public void test() {
     };
 }
