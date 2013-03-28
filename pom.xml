@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.madz</groupId>
+	<artifactId>Madz.Stochastic</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Madz Stochastic Test Generation Framework</name>
+	<description>Stochastic Test Engineering Framework</description>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--NeedJava5,whichisthedefaultsincev2.3ofthemaven-compiler-plugin. -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<excludes>
+							<exclude>net/madz/db/metadata/mysql/impl/builder/MySQLSchemaMetaDataBuilder.java</exclude>
+							<exclude>net/madz/db/metadata/**/*.java</exclude>
+							<exclude>net/madz/db/core/meta/immutable/jdbc/impl/*.java</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
