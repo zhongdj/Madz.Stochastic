@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.madz.stochastic.demo.processor.ActionProcessor;
-import net.madz.stochastic.utilities.annotations.Processor;
+import net.madz.test.stochastic.utilities.annotations.Processor;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
